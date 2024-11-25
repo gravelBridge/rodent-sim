@@ -138,7 +138,7 @@ def run(context):
             'middle': {'x': inches_to_cm(55.519), 'y': inches_to_cm(53.50)}
         }
     
-        OUTPUT_DIR = '/Users/gravelbridge/Desktop/RatEyes/track_images'
+        OUTPUT_DIR = '/Users/gravelbridge/Desktop/blairlab_fusion/track_images'
         if not os.path.exists(OUTPUT_DIR):
             os.makedirs(OUTPUT_DIR)
     
