@@ -86,7 +86,7 @@ The repository is organized to separate code, rendered images, and configuration
 ### `images-gi/`
 - Holds images rendered with global illumination. The naming convention `6_6_0_3_L.png` or `6_6_0_3_R.png` encodes position and configuration. For example, `6_6_0_3_L` means:
   - Position: (6,6) in the grid space mapping.
-  - Heading or configuration: `_0_3_` indicates East heading and cue configuration 3 (cue light 3 is on).
+  - Heading or configuration: `_0_3_` indicates East heading and cue configuration 3 (the North cue light is on).
   - Eye: `L` for left eye, `R` for right eye.
 
 These GI images have more realistic lighting, shadows, and reflections, making them valuable for evaluating how lighting realism affects model training and performance.
