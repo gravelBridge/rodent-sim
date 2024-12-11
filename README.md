@@ -84,9 +84,9 @@ The repository is organized to separate code, rendered images, and configuration
 - Contains images captured from a specific position (`x=55.52, y=53.50`) at various headings (0°, 90°, 180°, 270°) and for both left and right eyes. These images represent a static example dataset. The naming scheme (`left_x55.52_y53.50_h0.png`) encodes the eye (left/right), position coordinates, and heading.
 
 ### `images-gi/`
-- Holds images rendered with global illumination. The naming convention `6_6_0_3_L.png` or `6_6_0_3_R.png` encodes position and configuration. For example, `6_6_0_3_L` might mean:
-  - Position: (6,6) in some grid space mapping.
-  - Heading or configuration: `_0_3_` could indicate heading 0° and barrier configuration 3.
+- Holds images rendered with global illumination. The naming convention `6_6_0_3_L.png` or `6_6_0_3_R.png` encodes position and configuration. For example, `6_6_0_3_L` means:
+  - Position: (6,6) in the grid space mapping.
+  - Heading or configuration: `_0_3_` indicates East heading and cue configuration 3 (cue light 3 is on).
   - Eye: `L` for left eye, `R` for right eye.
 
 These GI images have more realistic lighting, shadows, and reflections, making them valuable for evaluating how lighting realism affects model training and performance.
