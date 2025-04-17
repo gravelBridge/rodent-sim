@@ -6,15 +6,15 @@ app = adsk.core.Application.get()
 ui = app.userInterface
 
 # Global position index (1-8)
-# 1: Middle facing East (Left eye)
-# 2: Middle facing East (Right eye)
-# 3: Middle facing North (Left eye)
-# 4: Middle facing North (Right eye)
-# 5: Middle facing West (Left eye)
-# 6: Middle facing West (Right eye)
-# 7: Middle facing South (Left eye)
-# 8: Middle facing South (Right eye)
-POSITION_INDEX = 1
+# 1: Middle facing East (Left eye), 6_6_0_3_L
+# 2: Middle facing East (Right eye), 6_6_0_3_R
+# 3: Middle facing North (Left eye), 6_6_3_3_L
+# 4: Middle facing North (Right eye), 6_6_3_3_R
+# 5: Middle facing West (Left eye), 6_6_2_3_L
+# 6: Middle facing West (Right eye), 6_6_2_3_R
+# 7: Middle facing South (Left eye), 6_6_1_3_L
+# 8: Middle facing South (Right eye), 6_6_1_3_R
+POSITION_INDEX = 4
 
 def switch_to_render_workspace():
     render_workspace = ui.workspaces.itemById('FusionRenderEnvironment')

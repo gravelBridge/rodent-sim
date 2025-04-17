@@ -7,6 +7,7 @@ import os
 import time
 import sys
 import datetime
+import csv
 
 # Configuration variables
 exit_on_error = True
@@ -415,49 +416,64 @@ def capture_views(grid_positions, output_dir):
             if exit_on_error:
                 sys.exit(1)
 
+def read_grid_positions_from_csv(csv_file_path):
+    """
+    Read grid positions from a CSV file.
+    
+    Args:
+        csv_file_path (str): Path to the CSV file containing grid positions
+        
+    Returns:
+        list: List of (x, y) tuples representing grid coordinates
+    """
+    log_message(f"Reading grid positions from CSV: {csv_file_path}")
+    grid_positions = []
+    
+    try:
+        with open(csv_file_path, 'r') as csv_file:
+            csv_reader = csv.reader(csv_file)
+            for row in csv_reader:
+                if len(row) >= 2:
+                    try:
+                        x = int(row[0])
+                        y = int(row[1])
+                        grid_positions.append((x, y))
+                    except ValueError:
+                        log_message(f"Warning: Skipping invalid row in CSV: {row}")
+        
+        log_message(f"Successfully read {len(grid_positions)} grid positions from CSV")
+        return grid_positions
+        
+    except Exception as e:
+        log_message(f"ERROR reading CSV file: {str(e)}\n{traceback.format_exc()}")
+        raise
+
 def run(context):
     """
-    The main entry point for the script. Modify grid_positions or output_directory
-    as needed. Then run the script in Fusion 360.
+    The main entry point for the script. Reads grid positions from a CSV file
+    and renders images for each position.
     """
     log_message("=== Script started ===")
     ui = adsk.core.Application.get().userInterface
     try:
-        # Example usage - add grid positions here
-        grid_positions = [
-            (1, 1),
-            (3, 2),
-            (4, 2),
-            (8, 2),
-            (9, 2),
-            (11, 1),
-            (6, 3),
-            (10, 3),
-            (2, 5),
-            (10, 5),
-            (3, 6),
-            (5, 6),
-            (7, 6),
-            (9, 6),
-            (2, 7),
-            (6, 7),
-            (10, 7),
-            (2, 9),
-            (6, 9),
-            (10, 9),
-            (3, 10),
-            (4, 10),
-            (8, 10),
-            (9, 10),
-            (1, 11),
-            (11, 11)
-            # More positions as needed...
-        ]
-        
-        # Modify path as needed for machine
+        # Modify paths as needed for your machine
+        csv_file_path = r"/Users/gravelbridge/Desktop/blairlab_fusion/dynamic/grid_positions.csv"
         output_directory = r"/Users/gravelbridge/Desktop/blairlab_fusion/dynamic/images"
+        
+        log_message(f"CSV file path: {csv_file_path}")
         log_message(f"Using output directory: {output_directory}")
         
+        # Read grid positions from CSV file
+        grid_positions = read_grid_positions_from_csv(csv_file_path)
+        
+        # Check if we have any positions to process
+        if not grid_positions:
+            log_message("WARNING: No grid positions found in CSV file")
+            ui.messageBox("No grid positions found in the CSV file.")
+            if exit_on_error:
+                sys.exit(1)
+            return
+            
         capture_views(grid_positions, output_directory)
         log_message("=== Script completed successfully ===")
         
